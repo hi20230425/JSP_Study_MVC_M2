@@ -27,6 +27,8 @@ public class JDBCUtil {
 			System.out.println("DataBase 가 잘 연결 되었습니다. ");
 			
 		}catch (Exception e) {
+			//e.printStackTrace();
+			
 			System.out.println("DataBase 연결이 실패 되었습니다. ");
 		}
 				
@@ -36,9 +38,85 @@ public class JDBCUtil {
 	
 	//2. 메소드 : 사용한 메소드를 제거하는 메소드 ( PreparedStatement , Connection ) 
 		// Insert, Update, Delete 문을 사용했을 시 
+	public static void close (PreparedStatement pstmt, Connection conn) {
+		
+		//PreparedStatement 객체 제거 
+		if ( pstmt != null) {		//pstmt 가 null 아닐때 
+			try {
+				if ( !pstmt.isClosed()) {  // pstmt 가 close가 아닐때 
+					pstmt.close();
+				}
+				
+				System.out.println("PreparedStatement 가 잘 제거 되었습니다.  ");
+				
+			}catch (Exception e) {
+				System.out.println("PreparedStatement 가 제거중 오류 발생 ");
+			}
+		}
+		
+		//Connection 객체 제거 
+		if ( conn != null) {		//pstmt 가 null 아닐때 
+			try {
+				if ( !conn.isClosed()) {  // pstmt 가 close가 아닐때 
+					conn.close();
+				}
+				
+				System.out.println("Connection 가 잘 제거 되었습니다.  ");
+				
+			}catch (Exception e) {
+				System.out.println("Connection 가 제거중 오류 발생 ");
+			}
+		}
+			
+	}
 	
 	//3. 메소드 : 사용한 메소드를 제거하는 메소드 ( ResultSet, PreparedStatement, Connection ) 
 		// Select 문일때 
 	
+public static void close (ResultSet rs , PreparedStatement pstmt, Connection conn) {
+	
+	//ResultSet 객체 제거 
+	if ( rs != null) {		//pstmt 가 null 아닐때 
+		try {
+			if ( !rs.isClosed()) {  // pstmt 가 close가 아닐때 
+				rs.close();
+			}
+			
+			System.out.println("ResultSet 가 잘 제거 되었습니다.  ");
+			
+		}catch (Exception e) {
+			System.out.println("ResultSet 가 제거중 오류 발생 ");
+		}
+	}
+		
+		//PreparedStatement 객체 제거 
+		if ( pstmt != null) {		//pstmt 가 null 아닐때 
+			try {
+				if ( !pstmt.isClosed()) {  // pstmt 가 close가 아닐때 
+					pstmt.close();
+				}
+				
+				System.out.println("PreparedStatement 가 잘 제거 되었습니다.  ");
+				
+			}catch (Exception e) {
+				System.out.println("PreparedStatement 가 제거중 오류 발생 ");
+			}
+		}
+		
+		//Connection 객체 제거 
+		if ( conn != null) {		//pstmt 가 null 아닐때 
+			try {
+				if ( !conn.isClosed()) {  // pstmt 가 close가 아닐때 
+					conn.close();
+				}
+				
+				System.out.println("Connection 가 잘 제거 되었습니다.  ");
+				
+			}catch (Exception e) {
+				System.out.println("Connection 가 제거중 오류 발생 ");
+			}
+		}
+			
+	}
 	
 }
