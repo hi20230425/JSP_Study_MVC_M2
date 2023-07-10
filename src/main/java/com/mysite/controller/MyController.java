@@ -45,7 +45,8 @@ public class MyController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at (MyController) : ").append(request.getContextPath());
 		
-		// client 에서 get 방식으로 넘어오는 요청 처리를 doPost에서 한꺼번에 처리하도록 던져줌 		
+		// client 에서 get 방식으로 넘어오는 요청 처리를 doPost에서 한꺼번에 처리하도록 던져줌 	
+		request.setCharacterEncoding("UTF-8"); 
 		doPost ( request, response); 
 	}
 
@@ -60,6 +61,9 @@ public class MyController extends HttpServlet {
 		
 		// URL : http://localhost:8181/JSP_Study_MVC_M2/my.do
 		// URI : /JSP_Study_MVC_M2/my.do
+		
+		request.setCharacterEncoding("UTF-8"); 
+		
 		
 		//1. Client의 요청 정보를 path 변수에 등록 함. 
 		String url = request.getRealPath(getServletInfo()); 
