@@ -60,14 +60,14 @@ public class MyController extends HttpServlet {
 		
 		//1. Client의 요청 정보를 path 변수에 등록 함. 
 		String url = request.getRealPath(getServletInfo()); 
-			System.out.println("클라이언트가 보내는 전체 URL(실제 시스템의 물리적 경로)  : " + url );
+			//System.out.println("클라이언트가 보내는 전체 URL(실제 시스템의 물리적 경로)  : " + url );
 		
 		
 		String uri = request.getRequestURI(); 
-			System.out.println("클라이언트가 보내는 요청 uri : " + uri);
+			//System.out.println("클라이언트가 보내는 요청 uri : " + uri);
 		
 		String path = uri.substring(uri.lastIndexOf("/")); 
-			System.out.println("파일 명을 읽어옴 : " + path );
+			//System.out.println("파일 명을 읽어옴 : " + path );
 			
 		//2. 클라이언트의 요청 정보에 따라서 적절히 분기 처리 한다. 
 		if ( path.equals("/login.do")) {       
@@ -84,7 +84,7 @@ public class MyController extends HttpServlet {
 			
 		} else if (path.equals("/getBoard.do")) {
 			System.out.println("getBoard.do 를 요청 했습니다. ");
-			// 게사판의 값을 읽어 올때 
+			// 게시판의 값을 읽어 올때 
 			
 		}
 			
