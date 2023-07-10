@@ -69,6 +69,8 @@ public class MyController extends HttpServlet {
 		String url = request.getRealPath(getServletInfo()); 
 			//System.out.println("클라이언트가 보내는 전체 URL(실제 시스템의 물리적 경로)  : " + url );
 		
+		StringBuffer urll = request.getRequestURL(); 
+		System.out.println("System URL : " + urll);
 		
 		String uri = request.getRequestURI(); 
 			//System.out.println("클라이언트가 보내는 요청 uri : " + uri);
@@ -106,14 +108,7 @@ public class MyController extends HttpServlet {
 			
 			//4. 비즈니스 로직을 처리후 view 페이지로 이동 
 			response.sendRedirect("getBoardList.jsp"); 
-			
-			
-			
-			
-			
-			
-			
-			
+		
 			
 		} else if (path.equals("/getBoard.do")) {
 			System.out.println("getBoard.do 를 요청 했습니다. ");
