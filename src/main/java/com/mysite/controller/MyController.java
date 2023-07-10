@@ -1,11 +1,14 @@
 package com.mysite.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.mysite.board.BoardDAO;
+import com.mysite.board.BoardDTO;
 
 /**
  * Servlet implementation class MyController
@@ -78,9 +81,35 @@ public class MyController extends HttpServlet {
 			System.out.println("logout.do 요청을 했습니다. ");
 			//로그아웃 요청을 처리하는 코드 블락 
 			
-		} else if (path.equals("/insert.do")) {
-			System.out.println("insert.do 요청을 했습니다. ");
-			// 게시판에서 값을 DB에 저장함. 
+		} else if (path.equals("/insertBoard.do")) {
+			System.out.println("insertBoard.do 요청을 했습니다. ");
+			// 게시판에서 값을 DB에 저장함.
+			
+			// 1. client 폼에서 넘어오는 변수의 값을 받아서 새로운 변수에 제 할당. 
+			String title = request.getParameter("title"); 
+			String writer = request.getParameter("writer"); 
+			String content = request.getParameter("content");
+			
+			//2. DTO 객체를 생성해서 Setter 주입 
+			BoardDTO dto = new BoardDTO (); 
+			dto.setTitle(title); 
+			dto.setWrite(writer); 
+			dto.setContent(content); 
+			
+			//3. DAO 객체 생성후 insertBoard(dto)  
+			BoardDAO dao = new BoardDAO (); 
+			dao.insertBoard(dto);        //Insert 완료 
+			
+			//4. 비즈니스 로직을 처리후 view 페이지로 이동 
+			response.sendRedirect("getBoardList.jsp"); 
+			
+			
+			
+			
+			
+			
+			
+			
 			
 		} else if (path.equals("/getBoard.do")) {
 			System.out.println("getBoard.do 를 요청 했습니다. ");

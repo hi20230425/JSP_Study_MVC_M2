@@ -11,9 +11,9 @@ public class InsertBoard_Test {
 		BoardDTO dto = new BoardDTO(); 
 		
 		   //dto객체에 setter를 사용해서 필드의 값을 입력 
-			dto.setTitle("글 제목을 입력 합니다.  - 3");
+			dto.setTitle("글 제목을 입력 합니다.  - 5");
 			dto.setWrite("admin");
-			dto.setContent("글 내용 입니다.   - 3");
+			dto.setContent("글 내용 입니다.   - 5");
 	
 		//2. DAO 객체를 생성해서 insertBoard(dto) 호출시   <== DB에 Insert 됨 ... 
 		BoardDAO dao = new BoardDAO(); 
