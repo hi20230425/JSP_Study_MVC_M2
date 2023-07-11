@@ -1,11 +1,14 @@
 package com.mysite.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.mysite.board.BoardDAO;
 import com.mysite.board.BoardDTO;
@@ -114,6 +117,32 @@ public class MyController extends HttpServlet {
 			System.out.println("getBoard.do 를 요청 했습니다. ");
 			// 게시판의 값을 읽어 올때 
 			
+		} else if (path.equals("/getBoardList.do")) {
+			System.out.println("getBoardList.do 를 요청 했습니다. ");
+			
+			//1. DTO 객체 생성 
+			BoardDTO dto = new BoardDTO(); 
+			
+			//2. DAO의 getBoardList(dto) 
+			BoardDAO dao = new BoardDAO(); 
+			
+			List<BoardDTO> boardList = new ArrayList<BoardDTO>(); 
+			
+			//boardList 에는 board 테이블의 각 레코드를 dto에 저장후 boardList 에 추가된 객체를 리턴 
+			boardList = dao.getBoardList(dto); 
+			
+			
+			//리턴받은 boardList를 Clent View 페이지로 전송 , ( Session 에 리스트를 저장후 클라이언트로 전송 ) 
+			//세션 변수 선언 
+			HttpSession session = request.getSession(); 
+			
+			//세션에 boardList를 추가 
+			session.setAttribute("boardList", boardList); 
+			
+			//클라이언트 뷰페이지로 이동 
+			response.sendRedirect("getBoardList.jsp"); 
+			
+							
 		}
 			
 		
