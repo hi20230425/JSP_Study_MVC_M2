@@ -110,7 +110,7 @@ public class MyController extends HttpServlet {
 			dao.insertBoard(dto);        //Insert 완료 
 			
 			//4. 비즈니스 로직을 처리후 view 페이지로 이동 
-			response.sendRedirect("getBoardList.jsp"); 
+			response.sendRedirect("getBoardList.do"); 
 		
 			
 		} else if (path.equals("/getBoard.do")) {
@@ -133,6 +133,8 @@ public class MyController extends HttpServlet {
 			
 			
 			//리턴받은 boardList를 Clent View 페이지로 전송 , ( Session 에 리스트를 저장후 클라이언트로 전송 ) 
+			// Session : 접속한 client에 고유하게 부여된 식별자가 서버 메모리에 할당. 
+			
 			//세션 변수 선언 
 			HttpSession session = request.getSession(); 
 			
