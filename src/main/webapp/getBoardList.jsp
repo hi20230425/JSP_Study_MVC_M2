@@ -56,7 +56,9 @@
 		 
 		 <%
 			}
-		 
+		    
+		    //session 변수를 사용후 변수에 담긴 값을 제거 
+			session.removeAttribute("boardList"); 
 		 %>
 		 
 		<!-- DB의 값을 가져와서 루프 시작 -->

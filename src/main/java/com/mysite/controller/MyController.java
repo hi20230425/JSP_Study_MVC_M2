@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import com.mysite.board.BoardDAO;
 import com.mysite.board.BoardDTO;
+import com.mysite.users.UsersDAO;
+import com.mysite.users.UsersDTO;
 
 /**
  * Servlet implementation class MyController
@@ -146,11 +148,49 @@ public class MyController extends HttpServlet {
 			
 							
 		}else if (path.equals("/insertUsers.do")) {
+			System.out.println("/insertUsers.do - 요청 ");
 			//Users테이블에 값을 Insert 코드 블락 
 			
+			//1. Form에서 넘어오는 값을 읽어와서 새로운 변수에 할당 
+			String id = request.getParameter("id"); 
+			String password = request.getParameter("password"); 
+			String name = request.getParameter("name"); 
+			String role = request.getParameter("role"); 
+			
+			//2. DTO 에 값을 할당. 
+			UsersDTO dto = new UsersDTO(); 
+			dto.setId(id); 
+			dto.setPassword(password); 
+			dto.setName(name); 
+			dto.setRole(role); 
+			
+			//3. DAO 의 메소드 호출  : insertUsers(dto) 
+			UsersDAO dao = new UsersDAO(); 
+			dao.insertUsers(dto); 
+			
+			//4. 비즈니스로직 모두 처리후 view 페이지 이동 
+			response.sendRedirect("getUsersList.do"); 
+			
 		}else if ( path.equals("/getUsersList.do")) {
+			System.out.println("/getUsersList.do 요청 ");
 			//Users테이블의 값을 Select 해서 출력 
 			
+			//1. 객체 생성 
+			UsersDTO dto = new UsersDTO(); 
+			UsersDAO dao = new UsersDAO(); 
+			
+			//2. 메소드 호출후 리턴으로 List 받음. 
+			List<UsersDTO> usersList = new ArrayList<UsersDTO>(); 
+			usersList = dao.getUsersList(dto); 
+			
+			//3. Session 객체를 사용해서 변수에 userList 를 저장함. 
+			HttpSession session = request.getSession(); 
+			
+			session.setAttribute("usersList", usersList); 
+			
+			
+			//4. 비즈니스로직 모두 처리후 view 페이지 이동 
+			response.sendRedirect("getUsersList.jsp"); 
 		}
 			
 		
