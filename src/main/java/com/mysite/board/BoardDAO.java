@@ -1,6 +1,10 @@
 package com.mysite.board;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.mysite.common.JDBCUtil;
 
@@ -21,7 +25,7 @@ public class BoardDAO {
 	private final String BOARD_UPDATE = ""; 
 	private final String BOARD_DELETE = ""; 
 	private final String BOARD_GET = ""; 
-	private final String BOARD_LIST = ""; 
+	private final String BOARD_LIST = "select * from board order by seq desc"; 
 	
 	
 	//1. board 테이블에 값을 넣는 메소드 : insert  
@@ -55,7 +59,28 @@ public class BoardDAO {
 		
 	}
 	
+	//2. UPDATE 
 	
+	//3. DELETE 
+	
+	
+	//4. 상세 페이지 (GET) : 레코드 1개 
+	
+	//5. 리스트 페이지 (BOARD_LIST) : 레코드 여러개 
+			// BOARD_LIST = "select * from board order by seq desc"
+	public List<BoardDTO> getBoardList(BoardDTO dto){
+		System.out.println("getBoardList 메소드 호출 - 게시판 리스트 페이지");
+		List<BoardDTO> boardList = new ArrayList<BoardDTO>(); 
+		
+		
+		
+		
+		
+		
+		
+		
+		return boardList; 	
+	}
 	
 	
 	
