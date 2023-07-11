@@ -145,6 +145,12 @@ public class MyController extends HttpServlet {
 			response.sendRedirect("getBoardList.jsp"); 
 			
 							
+		}else if (path.equals("/insertUsers.do")) {
+			//Users테이블에 값을 Insert 코드 블락 
+			
+		}else if ( path.equals("/getUsersList.do")) {
+			//Users테이블의 값을 Select 해서 출력 
+			
 		}
 			
 		
