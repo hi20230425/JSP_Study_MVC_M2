@@ -225,6 +225,40 @@ public class MyController extends HttpServlet {
 			
 			//4. 비즈니스로직 모두 처리후 view 페이지 이동 
 			response.sendRedirect("getUsersList.jsp"); 
+			
+			
+			//글 수정 
+		}else if (path.equals("/updateBoard.do")) {
+			//
+			System.out.println("/updateBoard.do - 요청 성공 ");
+			
+			//1. 클라이언트에서 넘어오는 변수 값을 받음. 
+			String title = request.getParameter("title"); 
+			String content = request.getParameter("content"); 
+			String seq = request.getParameter("seq"); 
+			
+			System.out.println("넘버 변수 변환 : " + seq);
+			
+			//2. DTO에 Setter 주입 
+			BoardDTO dto = new BoardDTO(); 
+			dto.setTitle(title); 
+			dto.setContent(content); 
+			dto.setSeq(Integer.parseInt(seq)); 
+			
+			//3. DAO의 메소드 호출 : updateBoard(dto) 
+			BoardDAO dao = new BoardDAO(); 
+			dao.updateBoard(dto); 
+			
+			// 4. view 페이지로 이동 
+			
+			response.sendRedirect("getBoardList.do"); 
+			
+			
+			
+			
+			
+			
+			
 		}
 			
 		

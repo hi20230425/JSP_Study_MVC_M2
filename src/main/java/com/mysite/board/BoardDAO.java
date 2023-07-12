@@ -22,9 +22,10 @@ public class BoardDAO {
 	//SQL 쿼리를 상수로 정의후에 각각 필요한 메소드에서 사용  
 	private final String BOARD_INSERT = 
 			"insert into board (seq,title,write,content) values ((select nvl(max(seq),0) + 1 from board), ?,?,?)"; 
-	private final String BOARD_UPDATE = ""; 
+	private final String BOARD_UPDATE = "update board set title = ? , content = ? where seq = ?"; 
 	private final String BOARD_DELETE = ""; 
 	private final String BOARD_GET = "select * from board where seq = ?"; 
+	private final String BOARD_ADD_CNT = "update board set cnt = (select cnt + 1 from board where seq = ?) where seq=?"; 
 	private final String BOARD_LIST = "select * from board order by seq desc"; 
 	
 	
@@ -62,6 +63,34 @@ public class BoardDAO {
 	}
 	
 	//2. UPDATE 
+		//BOARD_UPDATE = "update board set title = ? , content = ? where seq = ?"; 
+	public void updateBoard(BoardDTO dto) {
+		System.out.println("updateBoard 메소드 호출 ");
+		
+		try {
+			conn = JDBCUtil.getConnection(); 
+			pstmt = conn.prepareStatement(BOARD_UPDATE); 
+			
+			pstmt.setString(1, dto.getTitle());
+			pstmt.setString(2, dto.getContent());
+			pstmt.setInt(3, dto.getSeq());
+			
+			pstmt.executeUpdate(); 
+			
+			System.out.println("업데이트 성공 ");
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("업데이트 실패 ");
+			
+		}finally {
+			JDBCUtil.close(pstmt, conn);
+		}
+		
+		
+		
+	}
+	
 	
 	//3. DELETE 
 	
@@ -70,6 +99,10 @@ public class BoardDAO {
 		//BOARD_GET = "select * from board where seq = ?";
 	public BoardDTO getBoard (BoardDTO dto) {
 		BoardDTO board = new BoardDTO(); 
+		
+		// 조회수 늘려주는 메소드 
+		addCNT(dto); 
+		
 		
 		try {
 			conn = JDBCUtil.getConnection(); 
@@ -100,6 +133,28 @@ public class BoardDAO {
 		}
 				
 		return board; 
+	}
+	
+	// 조회수 증가 메소드 : 
+		//BOARD_ADD_CNT = "update board set cnt = (select cnt + 1 from board where seq = ?) where seq=?";
+	public void addCNT(BoardDTO dto) {
+		
+		try {
+			conn = JDBCUtil.getConnection(); 
+			pstmt = conn.prepareStatement(BOARD_ADD_CNT); 
+			pstmt.setInt(1, dto.getSeq());
+			pstmt.setInt(2, dto.getSeq());
+			
+			pstmt.executeUpdate();     // insert , update, delete 
+			
+			System.out.println("조회수 증가 성공");
+			
+		}catch (Exception e) {	
+			e.printStackTrace();
+			System.out.println("조회수 증가 실패");
+		} finally {
+			JDBCUtil.close(pstmt, conn);
+		}
 	}
 	
 	
