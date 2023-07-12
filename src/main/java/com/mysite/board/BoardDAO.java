@@ -24,7 +24,7 @@ public class BoardDAO {
 			"insert into board (seq,title,write,content) values ((select nvl(max(seq),0) + 1 from board), ?,?,?)"; 
 	private final String BOARD_UPDATE = ""; 
 	private final String BOARD_DELETE = ""; 
-	private final String BOARD_GET = ""; 
+	private final String BOARD_GET = "select * from board where seq = ?"; 
 	private final String BOARD_LIST = "select * from board order by seq desc"; 
 	
 	
@@ -66,8 +66,44 @@ public class BoardDAO {
 	//3. DELETE 
 	
 	
-	//4. 상세 페이지 (GET) : 레코드 1개 
+	//4. 상세 페이지 (GET) : 레코드 1개 : 리턴 타입 BoardDTO 
+		//BOARD_GET = "select * from board where seq = ?";
+	public BoardDTO getBoard (BoardDTO dto) {
+		BoardDTO board = new BoardDTO(); 
+		
+		try {
+			conn = JDBCUtil.getConnection(); 
+			pstmt = conn.prepareStatement(BOARD_GET); 
+			pstmt.setInt(1, dto.getSeq() );
+			
+			rs = pstmt.executeQuery(); 
+			
+			while (rs.next()) {
+				
+				board.setSeq(rs.getInt("SEQ"));
+				board.setTitle(rs.getString("TITLE"));
+				board.setWrite(rs.getString("WRITE"));
+				board.setContent(rs.getString("CONTENT"));
+				board.setRegdate(rs.getDate("REGDATE"));
+				board.setCnt(rs.getInt("CNT"));
+			
+			}
+			
+			System.out.println("Board 테이블에서 상세 레코드가 잘 처리되었습니다");
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Board 테이블에서 상세 레코드가 잘 처리되었습니다");
+			
+		}finally {
+			JDBCUtil.close(rs, pstmt, conn);
+		}
+				
+		return board; 
+	}
 	
+	
+
 	//5. 리스트 페이지 (BOARD_LIST) : 레코드 여러개 
 			// BOARD_LIST = "select * from board order by seq desc"
 	public List<BoardDTO> getBoardList(BoardDTO dto){

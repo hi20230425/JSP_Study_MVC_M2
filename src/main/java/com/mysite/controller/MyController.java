@@ -117,9 +117,43 @@ public class MyController extends HttpServlet {
 			
 		} else if (path.equals("/getBoard.do")) {
 			System.out.println("getBoard.do 를 요청 했습니다. ");
-			// 게시판의 값을 읽어 올때 
+			// 게시판의 값을 읽어 올때 (글 상세)
+			
+			//request.getParameter 으로 넘어오는 모든 변수의 값은 String
+			// Spring 에서는 자동으로 Framework에서 자동으로 처리됨 
+			
+				//Integer.parseInt(seq) 
+			
+			String seq = request.getParameter("seq");
+			
+			//1. DTO 에 seq 의 값을 setter 주입 
+			BoardDTO dto = new BoardDTO(); 
+			dto.setSeq(Integer.parseInt(seq));
+			
+			//3. DAO 객체에 getBoard(dto) 넣어서 호출 ====> 리턴으로 dto 를 받아온다. 
+			BoardDAO dao = new BoardDAO(); 
+			
+			//리턴으로 돌아오는 DTO 값을 받을 변수 선언 
+			BoardDTO board = new BoardDTO(); 
+			board = dao.getBoard(dto); 
+			
+			// System.out.println(board);
+			
+			
+			//4. session 에 값을 저장후 뷰 페이지로 전달 : Model 
+				// 현재 클라이언트가 서버에 접속한 세션을 가지오 옴 
+			
+			// 세션 변수 선언 
+			HttpSession session = request.getSession(); 
+			
+			//세션 에 변수에 DB에서 select 한 DTO를 저장후 뷰 페이지로 전송 
+			session.setAttribute("board", board); 
+			
+			response.sendRedirect("getBoard.jsp"); 
+			
 			
 		} else if (path.equals("/getBoardList.do")) {
+			// 글 목록 
 			System.out.println("getBoardList.do 를 요청 했습니다. ");
 			
 			//1. DTO 객체 생성 
