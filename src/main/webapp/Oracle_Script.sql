@@ -49,8 +49,8 @@ select * from users;
 select nvl(max(seq),0) + 1 from board
 
 
--- 제품을 넣는 테이블 : 관리자 (Admin) - insertProducts.jsp   : 로그인후 Admin 롤을 가진 사용자만
---                                    getProductList.jsp 
+-- 제품을 넣는 테이블 : 관리자 (Admin) - insertProducts.jsp   : 로그인후 Admin 롤을 가진 사용자만 접근가능
+--                                 getProductList.jsp   : 로그인후 Admin 롤을 가진 사용자만 접근가능
 CREATE TABLE products (
 	p_code	number(5)		NOT NULL  primary key,
 	p_name	varchar2(100)		NULL,
