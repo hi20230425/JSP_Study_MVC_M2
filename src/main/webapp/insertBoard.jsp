@@ -31,6 +31,9 @@
 		</form>
 		<hr>
 		<a href="getBoardList.do">글 목록 가기</a>
+		<br> <br> 
+		<a href = "/JSP_Study_MVC_M2"> 처음 페이지로 이동 </a>
+		
 	</center>
 </body>
 </html>
