@@ -130,21 +130,22 @@ public class MyController extends HttpServlet {
 				response.sendRedirect("LoginForm.jsp"); 
 				
 			}
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+					
 		} else if (path.equals("/logout.do")) {
 			System.out.println("logout.do 요청을 했습니다. ");
 			//로그아웃 요청을 처리하는 코드 블락 
+			
+			// 1. 세션의 모든 변수와 값을 모두 삭제 
+			HttpSession session = request.getSession(); 
+			
+			//접속한 클라이언트에 session에 저장된 모든 변수의 값을 삭제 
+			session.invalidate(); 
+			
+			// 2. 세션 삭제후 이동 페이지 
+			response.sendRedirect("/JSP_Study_MVC_M2"); 
+			
+			
+			
 			
 		} else if (path.equals("/insertBoard.do")) {
 			System.out.println("insertBoard.do 요청을 했습니다. ");

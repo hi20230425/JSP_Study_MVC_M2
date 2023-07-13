@@ -75,7 +75,14 @@
 		}
 	
 	%>
+	<p /> <p />
+    <a href = "getBoardList.do"> 게시판 리스트 페이지</a> <p/>
+	<a href = "insertBoard.jsp"> 게시판 글쓰기 </a> <p/> 
 	
+	<hr> 
+	<a href = "getUsersList.do"> 사용자 리스트 페이지</a> <p/>
+	<a href = "insertUsers.jsp"> 사용자 등록 </a> <p/> 
+	<a href = "LoginForm.jsp"> 로그인 페이지 </a>
 
 </body>
 </html>
