@@ -3,8 +3,6 @@
 <%
 		String sessionId = (String) session.getAttribute("id"); 
 		String sessionRole = (String) session.getAttribute("role"); 
-
-
 %>
 
 

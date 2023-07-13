@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import com.mysite.board.BoardDAO;
 import com.mysite.board.BoardDTO;
+import com.mysite.products.ProductsDAO;
+import com.mysite.products.ProductsDTO;
 import com.mysite.users.UsersDAO;
 import com.mysite.users.UsersDTO;
 
@@ -329,7 +331,42 @@ public class MyController extends HttpServlet {
 			response.sendRedirect("getBoardList.do"); 
 			
 			
+		}else if (path.equals("/insertProducts.do")) {
+			System.out.println("/insertProducts.do 요청 성공");
+			
+			String p_code = request.getParameter("p_code"); 
+			String p_name = request.getParameter("p_name"); 
+			String p_kind = request.getParameter("p_kind"); 
+			String p_price = request.getParameter("p_price"); 
+			String p_content = request.getParameter("p_content"); 
+			String p_quantity = request.getParameter("p_quantity"); 
+			
+			ProductsDTO products = new ProductsDTO(); 
+			
+			products.setP_code(Integer.parseInt(p_code)); 
+			products.setP_name(p_name); 
+			products.setP_kind(p_kind); 
+			products.setP_price(p_price); 
+			products.setP_content(p_content); 
+			products.setP_quantity(p_quantity); 
+			
+			//dao 메소드 호출 
+			ProductsDAO dao = new ProductsDAO (); 
+			dao.insertProducts(products); 
+			
+			//view페이지 이동 
+			response.sendRedirect("getProducts.jsp"); 
+			
+			
+			
+		}else if (path.equals("/getProductsList.do")) {
+			System.out.println("/insertProducts.do 요청 성공");
+			
+			
+			
 		}
+		
+		
 			
 		
 		
